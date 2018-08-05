@@ -5,7 +5,7 @@ module Lib
 import Data.List
 import Data.List.Split
 
-elapsed :: String -> String -> Int
+elapsed :: [Char] -> [Char] -> Int
 elapsed fromDateStr toDateStr =
   let fromDateTimeParts = dateTimeParts fromDateStr
       toDateTimeParts = dateTimeParts toDateStr
@@ -16,7 +16,7 @@ elapsed fromDateStr toDateStr =
      + monthsToSeconds (fromDateTimeParts !! 1) (toDateTimeParts !! 1)
      + yearsToSeconds (fromDateTimeParts !! 0) (fromDateTimeParts !! 1) (toDateTimeParts !! 0) (toDateTimeParts !! 1)
 
-dateTimeParts :: String -> [Int]
+dateTimeParts :: [Char] -> [Int]
 dateTimeParts dateStr =
   let dateTime = splitOn "T" dateStr
       date = splitOn "-" (head dateTime)
