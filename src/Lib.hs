@@ -7,26 +7,26 @@ import Data.List.Split
 
 elapsed :: [Char] -> [Char] -> Int
 elapsed fromDateStr toDateStr =
-  let fromDateTimeParts = dateTimeParts fromDateStr
-      toDateTimeParts = dateTimeParts toDateStr
-  in (toDateTimeParts !! 5) - (fromDateTimeParts !! 5)
-     + minsToSeconds (toDateTimeParts !! 4 - fromDateTimeParts !! 4)
-     + hoursToSeconds (toDateTimeParts !! 3 - fromDateTimeParts !! 3)
-     + daysToSeconds (toDateTimeParts !! 2 - fromDateTimeParts !! 2)
-     + monthsToSeconds (fromDateTimeParts !! 1) (toDateTimeParts !! 1)
-     + yearsToSeconds (fromDateTimeParts !! 0) (fromDateTimeParts !! 1) (toDateTimeParts !! 0) (toDateTimeParts !! 1)
+  let [fromYr, fromMth, fromDay, fromHr, fromMin, fromSec] = dateTimeParts fromDateStr
+      [toYr, toMth, toDay, toHr, toMin, toSec] = dateTimeParts toDateStr
+  in toSec - fromSec
+     + minsToSeconds (toMin - fromMin)
+     + hoursToSeconds (toHr - fromHr)
+     + daysToSeconds (toDay - fromDay)
+     + monthsToSeconds fromMth toMth
+     + yearsToSeconds fromYr fromMth toYr toMth
 
 dateTimeParts :: [Char] -> [Int]
 dateTimeParts dateStr =
-  let dateTime = splitOn "T" dateStr
-      date = splitOn "-" (head dateTime)
-      time = splitOn ":" (last dateTime)
-  in [read (date !! 0) :: Int,
-      read (date !! 1) :: Int,
-      read (date !! 2) :: Int,
-      read (time !! 0) :: Int,
-      read (time !! 1) :: Int,
-      read (time !! 2) :: Int]
+  let [date, time] = splitOn "T" dateStr
+      [yr, mth, day] = splitOn "-" date
+      [hr, mins, sec] = splitOn ":" time
+  in [read yr :: Int,
+      read mth :: Int,
+      read day :: Int,
+      read hr :: Int,
+      read mins :: Int,
+      read sec :: Int]
 
 minsToSeconds :: Int -> Int
 minsToSeconds mins = mins * 60
