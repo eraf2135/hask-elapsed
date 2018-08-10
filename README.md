@@ -24,3 +24,7 @@ Build using:
 Then run using:
 
     stack exec hask-elapsed-exe
+    
+Test using:
+    
+    stack test

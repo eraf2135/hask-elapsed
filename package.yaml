@@ -22,6 +22,8 @@ description:         Please see the README on GitHub at <https://github.com/eraf
 dependencies:
 - base >= 4.7 && < 5
 - split == 0.2.3.3
+- hspec == 2.5.5
+- QuickCheck ==2.11.3
 
 library:
   source-dirs: src
