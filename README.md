@@ -13,8 +13,7 @@ Output will be the amount of seconds between the 2 dates. e.g.
 
     3601
     
-This is a Haskell port of [clj-elapsed](https://github.com/eraf2135/clj-elapsed) as a learning exercise to get my
-head around Haskell. So not sure if this is the most "Haskelly" way of doing things.
+This is a learning exercise to get my head around Haskell. So not sure if this is the most "Haskelly" way of doing things.
 
 ## Usage
 Build using:
