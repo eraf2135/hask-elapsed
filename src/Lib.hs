@@ -17,6 +17,8 @@ elapsed fromDateStr toDateStr =
      + yearsToSeconds fromYr fromMth toYr toMth
 
 dateTimeParts :: [Char] -> [Int]
+-- Converts a datetime string to an integer list of component date parts.
+-- e.g. "2018-12-31T23:11:52" = [2018 12 31 23 11 52]
 dateTimeParts dateStr =
   let [date, time] = splitOn "T" dateStr
       [yr, mth, day] = splitOn "-" date
@@ -51,6 +53,7 @@ yearsToSeconds fromYear fromMonth toYear toMonth =
   in daysToSeconds days
 
 extraLeapYrDays :: Int -> Int -> Int -> Int -> Int
+-- for a given date range, returns the number of days you need to add for leap years
 extraLeapYrDays fromYear fromMonth toYear toMonth =
   let numLeapYrsExclBoundaries = sum [1 | x <- [(succ fromYear)..(pred toYear)], isLeapYear x == True]
       lowerBoundaryLeapYearAdjustment = if isLeapYear fromYear && fromMonth <= 2 && (toMonth > 2 || toYear > fromYear)
@@ -63,4 +66,5 @@ extraLeapYrDays fromYear fromMonth toYear toMonth =
 
 
 isLeapYear :: Int -> Bool
+-- A leap year is every 4 years, but not every 100 years, then again every 400 years
 isLeapYear year = (year `mod` 4 == 0 && year `mod` 100 /= 0) || year `mod` 400 == 0
